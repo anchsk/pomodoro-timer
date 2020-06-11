@@ -1,0 +1,366 @@
+:root {
+  --bg: rgb(11, 76, 99);
+  --bg-darker: rgb(6, 46, 61);
+  --light-text: rgba(242, 242, 242, 1);
+}
+
+html[data-theme="green"] {
+  --bg: rgb(11, 76, 99);
+  --bg-darker: rgb(6, 46, 61);
+  --light-text: rgba(242, 242, 242, 1);
+}
+
+html[data-theme="orange"] {
+  --bg: rgb(219, 158, 63);
+  --bg-darker: rgb(180, 123, 32);
+  --light-text: rgba(242, 242, 242, 1);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  font-family: "Barlow", sans-serif;
+  color: var(--light-text);
+  -ms-touch-action: manipulation;
+      touch-action: manipulation;
+}
+
+body {
+  background-color: var(--bg);
+  padding: 0px 48px;
+}
+
+.bg-transition {
+  -webkit-transition: background-color 1s ease-in;
+  transition: background-color 1s ease-in;
+}
+
+#app {
+  max-width: 600px;
+  min-height: -webkit-fill-available;
+  height: 100vh;
+  margin: 0 auto;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+button {
+  background-color: var(--bg);
+  cursor: pointer;
+}
+
+header {
+  width: 100%;
+  padding: 24px 0;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+header > * {
+  font-size: 20px;
+  font-family: "Barlow Condensed", sans-serif;
+  -ms-flex-negative: 0;
+      flex-shrink: 0;
+  text-decoration: none;
+}
+
+header #app-name {
+  text-transform: uppercase;
+  letter-spacing: 5px;
+  font-weight: 400;
+}
+
+header #info-icon {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  border: 1px solid var(--light-text);
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  background-color: var(--bg);
+  color: var(--light-text);
+  font-weight: 400;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+header #info-icon:hover {
+  opacity: 1;
+}
+
+/* ---------- START of POMODORO COMPONENT ---------- */
+/* -----Timer-----
+  -Break-Session-
+  -----Start-----
+  -----Reset-----*/
+#pomodoro {
+  height: 70vh;
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: 1fr 1fr;
+      grid-template-columns: 1fr 1fr;
+  -ms-grid-rows: 45% 1fr 2fr 1fr;
+      grid-template-rows: 45% 1fr 2fr 1fr;
+  text-align: center;
+  max-height: 600px;
+}
+
+#timer {
+  -ms-grid-column: 1;
+  -ms-grid-column-span: 2;
+  grid-column: 1 / span 2;
+  place-self: center;
+}
+
+#timer #timer-label {
+  font-family: "Barlow Condensed";
+  font-size: 16px;
+  text-transform: uppercase;
+  letter-spacing: 4px;
+  margin-right: -4px;
+}
+
+#timer #time-left {
+  font-size: 52px;
+  padding-top: 20px;
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-rows: 1fr;
+      grid-template-rows: 1fr;
+  -ms-grid-columns: 1fr 18px 1fr;
+      grid-template-columns: 1fr 18px 1fr;
+}
+
+#timer #time-left #minutes {
+  text-align: right;
+}
+
+#timer #time-left #seconds {
+  text-align: left;
+}
+
+#break,
+#session {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-rows: 20px 1fr;
+      grid-template-rows: 20px 1fr;
+  -ms-grid-columns: 1fr 1fr 1fr;
+      grid-template-columns: 1fr 1fr 1fr;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  max-width: 120px;
+}
+
+#break > :first-child,
+#session > :first-child {
+  -ms-grid-column: 1;
+  -ms-grid-column-span: 3;
+  grid-column: 1 / span 3;
+}
+
+#break .timerLengthNumber,
+#session .timerLengthNumber {
+  font-size: 20px;
+}
+
+#break #break-decrement,
+#break #session-decrement,
+#session #break-decrement,
+#session #session-decrement {
+  -ms-grid-column-align: right;
+      justify-self: right;
+}
+
+#break #break-increment,
+#break #session-increment,
+#session #break-increment,
+#session #session-increment {
+  -ms-grid-column-align: left;
+      justify-self: left;
+  margin-bottom: 2px;
+}
+
+#session {
+  -ms-grid-column-align: left;
+      justify-self: left;
+  margin-left: 10px;
+}
+
+#break {
+  -ms-grid-column-align: right;
+      justify-self: right;
+  margin-right: 10px;
+}
+
+#start_stop {
+  -ms-grid-column: 1;
+  -ms-grid-column-span: 2;
+  grid-column: 1 / span 2;
+  border: 1px solid var(--light-text);
+  border-radius: 4px;
+  height: 48px;
+  width: 96px;
+  font-size: 16px;
+  font-weight: 700;
+  place-self: center;
+}
+
+#start_stop:hover {
+  opacity: 1;
+}
+
+button {
+  width: 48px;
+  height: 48px;
+  font-size: 32px;
+  border: none;
+}
+
+#reset {
+  -ms-grid-column: 1;
+  -ms-grid-column-span: 2;
+  grid-column: 1 / span 2;
+  -ms-grid-column-align: center;
+      justify-self: center;
+  height: 30%;
+  font-size: 16px;
+  text-decoration: underline;
+  border: none;
+  cursor: pointer;
+}
+
+/* ---------- END of POMODORO COMPONENT ---------- */
+footer {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  opacity: 0.6;
+  height: 64px;
+  font-size: 12px;
+}
+
+@media screen and (max-width: 400px) {
+  body {
+    padding: 0px 24px;
+  }
+  #app-name,
+  #info-icon {
+    font-size: 18px;
+  }
+  #break,
+  #session {
+    height: 70px;
+  }
+  #break > :first-child,
+  #session > :first-child {
+    -ms-grid-column: 1;
+    -ms-grid-column-span: 3;
+    grid-column: 1 / span 3;
+    height: 30px;
+  }
+  #break button,
+  #session button {
+    width: 40px;
+    height: 40px;
+  }
+  #start_stop {
+    color: var(--bg);
+    border: none;
+    background-color: var(--light-text);
+    opacity: 0.9;
+  }
+}
+
+.infobox {
+  visibility: hidden;
+  position: absolute;
+  right: 50%;
+  -webkit-transform: translate(50%, 50%);
+          transform: translate(50%, 50%);
+  width: 200px;
+  height: 200px;
+  border-radius: 10px;
+  padding: 10px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+  background-color: var(--light-text);
+  -webkit-box-shadow: 10px 10px 20px var(--bg-darker);
+          box-shadow: 10px 10px 20px var(--bg-darker);
+}
+
+.infobox .closebuttonrow {
+  width: 180px;
+  position: absolute;
+  top: 10px;
+}
+
+.infobox .closebuttonrow .closebutton {
+  float: right;
+  text-align: center;
+  color: var(--bg);
+  cursor: pointer;
+  width: 20px;
+}
+
+.infobox > * {
+  color: var(--bg);
+}
+
+.infobox h3 {
+  font-family: "Barlow Condensed";
+  letter-spacing: 2px;
+  font-weight: 400;
+}
+
+.infobox p {
+  padding: 8px 0;
+  font-size: 12px;
+}
+
+.infobox a {
+  color: var(--bg);
+}
+/*# sourceMappingURL=style.css.map */
